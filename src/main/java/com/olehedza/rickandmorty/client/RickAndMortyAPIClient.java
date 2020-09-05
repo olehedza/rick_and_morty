@@ -23,7 +23,7 @@ public class RickAndMortyAPIClient {
         JsonNode jsonNode = new ObjectMapper().missingNode();
         try {
             jsonNode = getJson().orElse(new ObjectMapper()
-                    .readTree("{0}")).path(nodeName);
+                    .readTree("{}")).path(nodeName);
         } catch (JsonProcessingException e) {
             LOGGER.error("Error while json string processing", e);
         }
