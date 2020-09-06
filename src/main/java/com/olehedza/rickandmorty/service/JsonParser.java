@@ -1,7 +1,6 @@
 package com.olehedza.rickandmorty.service;
 
-import com.olehedza.rickandmorty.dto.CharacterDto;
-import com.olehedza.rickandmorty.dto.CharactersDto;
+import com.olehedza.rickandmorty.dto.client.CharactersDto;
 
 public interface JsonParser {
     CharactersDto parseToPojo();

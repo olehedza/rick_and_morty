@@ -2,10 +2,10 @@ package com.olehedza.rickandmorty.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.olehedza.rickandmorty.client.RickAndMortyAPIClient;
-import com.olehedza.rickandmorty.dto.CharacterDto;
-import com.olehedza.rickandmorty.dto.CharactersDto;
-import com.olehedza.rickandmorty.dto.LocationDto;
-import com.olehedza.rickandmorty.dto.OriginDto;
+import com.olehedza.rickandmorty.dto.client.CharacterDto;
+import com.olehedza.rickandmorty.dto.client.CharactersDto;
+import com.olehedza.rickandmorty.dto.client.LocationDto;
+import com.olehedza.rickandmorty.dto.client.OriginDto;
 import com.olehedza.rickandmorty.service.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
