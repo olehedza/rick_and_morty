@@ -6,11 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 public class Episode {
     @Id
@@ -19,4 +21,8 @@ public class Episode {
     private String url;
     @ManyToMany(mappedBy = "episodes")
     private Set<Character> characters;
+
+    public Episode(String url) {
+        this.url = url;
+    }
 }
