@@ -1,4 +1,4 @@
-package com.olehedza.rickandmorty.dto;
+package com.olehedza.rickandmorty.dto.client;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

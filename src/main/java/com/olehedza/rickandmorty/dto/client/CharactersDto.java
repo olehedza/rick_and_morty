@@ -1,4 +1,4 @@
-package com.olehedza.rickandmorty.dto;
+package com.olehedza.rickandmorty.dto.client;
 
 import java.util.List;
 import lombok.Getter;
