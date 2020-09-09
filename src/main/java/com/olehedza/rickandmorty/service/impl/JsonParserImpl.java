@@ -29,14 +29,14 @@ public class JsonParserImpl implements JsonParser {
 
         for (JsonNode node : results) {
             CharacterDto characterDto = new CharacterDto();
-            characterDto.setName(node.path("name").toString());
-            characterDto.setStatus(node.path("status").toString());
-            characterDto.setSpecies(node.path("species").toString());
-            characterDto.setType(node.path("type").toString());
-            characterDto.setGender(node.path("gender").toString());
-            characterDto.setImage(node.path("image").toString());
-            characterDto.setUrl(node.path("url").toString());
-            characterDto.setCreated(node.path("created").toString());
+            characterDto.setName(node.path("name").textValue());
+            characterDto.setStatus(node.path("status").textValue());
+            characterDto.setSpecies(node.path("species").textValue());
+            characterDto.setType(node.path("type").textValue());
+            characterDto.setGender(node.path("gender").textValue());
+            characterDto.setImage(node.path("image").textValue());
+            characterDto.setUrl(node.path("url").textValue());
+            characterDto.setCreated(node.path("created").textValue());
             characterDto.setLocation(parseToLocation(node));
             characterDto.setOrigin(parseToOrigin(node));
             characterDto.setEpisodes(parseToEpisodeList(node));
@@ -52,8 +52,8 @@ public class JsonParserImpl implements JsonParser {
         LocationDto locationDto = new LocationDto();
         JsonNode location = jsonNode.path("location");
 
-        locationDto.setName(location.path("name").toString());
-        locationDto.setUrl(location.path("url").toString());
+        locationDto.setName(location.path("name").textValue());
+        locationDto.setUrl(location.path("url").textValue());
         return locationDto;
     }
 
@@ -61,15 +61,15 @@ public class JsonParserImpl implements JsonParser {
         OriginDto originDto = new OriginDto();
         JsonNode origin = jsonNode.path("origin");
 
-        originDto.setName(origin.path("name").toString());
-        originDto.setUrl(origin.path("url").toString());
+        originDto.setName(origin.path("name").textValue());
+        originDto.setUrl(origin.path("url").textValue());
         return originDto;
     }
 
     private List<String> parseToEpisodeList(JsonNode jsonNode) {
         List<String> episodes = new ArrayList<>();
         for (JsonNode node : jsonNode.path("episode")) {
-            episodes.add(node.toString());
+            episodes.add(node.textValue());
         }
         return episodes;
     }
