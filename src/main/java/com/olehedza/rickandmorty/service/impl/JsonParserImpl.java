@@ -1,5 +1,6 @@
 package com.olehedza.rickandmorty.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.olehedza.rickandmorty.client.RickAndMortyAPIClient;
 import com.olehedza.rickandmorty.dto.client.CharacterDto;
@@ -7,6 +8,7 @@ import com.olehedza.rickandmorty.dto.client.CharactersDto;
 import com.olehedza.rickandmorty.dto.client.LocationDto;
 import com.olehedza.rickandmorty.dto.client.OriginDto;
 import com.olehedza.rickandmorty.service.JsonParser;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,8 @@ public class JsonParserImpl implements JsonParser {
     }
 
     @Override
-    public CharactersDto parseToPojo() {
+    public CharactersDto parseToPojo()
+            throws JsonProcessingException, URISyntaxException {
         JsonNode results = apiClient.getJsonNode("results");
         List<CharacterDto> characterDtoList = new ArrayList<>();
         CharactersDto charactersDto = new CharactersDto();
