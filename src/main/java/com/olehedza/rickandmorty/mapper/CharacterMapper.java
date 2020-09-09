@@ -28,7 +28,7 @@ public class CharacterMapper {
         model.setType(characterDto.getType());
         model.setGender(Character.Gender.valueOf(characterDto.getGender()));
         model.setImage(characterDto.getImage());
-        model.setEpisodes(new HashSet<>(characterDto.getEpisodes().stream()
+        model.setEpisodes(new HashSet<>(characterDto.getEpisode().stream()
                 .map(Episode::new)
                 .collect(Collectors.toSet())));
         model.setUrl(characterDto.getUrl());
