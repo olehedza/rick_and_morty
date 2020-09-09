@@ -25,7 +25,7 @@ public class CharacterController {
 
     @GetMapping("/random")
     public CharacterResponseDto getRandomCharacter() {
-        Character randomById = characterService.getRandomById();
+        Character randomById = characterService.getRandomCharacter();
         return characterMapper.toDto(randomById);
     }
 
@@ -33,7 +33,7 @@ public class CharacterController {
     public List<CharacterResponseDto> filterAllByNameString(
             @RequestParam(required = false, defaultValue = "") String name
     ) {
-        return characterService.getAllByNameContains(name).stream()
+        return characterService.getCharactersByNameContains(name).stream()
                 .map(characterMapper::toDto)
                 .collect(Collectors.toList());
     }
