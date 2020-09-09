@@ -1,5 +1,6 @@
 package com.olehedza.rickandmorty.model;
 
+import java.time.Instant;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Character {
     private @Enumerated(EnumType.STRING) Gender gender;
     private String image;
     private String url;
-    private String created;
+    private Instant created;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "origin_id", referencedColumnName = "id")
     private Origin origin;
