@@ -11,6 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class CharacterDto {
+    private Integer id;
     private String name;
     private String status;
     private String species;
@@ -19,7 +20,7 @@ public class CharacterDto {
     private OriginDto origin;
     private LocationDto location;
     private String image;
-    private List<String> episodes;
+    private List<String> episode;
     private String url;
     private String created;
 }
