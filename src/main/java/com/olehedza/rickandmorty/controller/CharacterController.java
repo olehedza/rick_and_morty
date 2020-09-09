@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/character")
+@RequestMapping("/character")
 public class CharacterController {
     private final CharacterService characterService;
     private final CharacterMapper characterMapper;
@@ -30,7 +30,9 @@ public class CharacterController {
     }
 
     @GetMapping
-    public List<CharacterResponseDto> filterAllByNameString(@RequestParam String name) {
+    public List<CharacterResponseDto> filterAllByNameString(
+            @RequestParam(required = false, defaultValue = "") String name
+    ) {
         return characterService.getAllByNameContains(name).stream()
                 .map(characterMapper::toDto)
                 .collect(Collectors.toList());
