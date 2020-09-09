@@ -1,5 +1,6 @@
 package com.olehedza.rickandmorty.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.olehedza.rickandmorty.dto.client.CharacterDto;
 import com.olehedza.rickandmorty.dto.client.CharactersDto;
 import com.olehedza.rickandmorty.mapper.CharacterMapper;
@@ -9,6 +10,7 @@ import com.olehedza.rickandmorty.model.Character;
 import com.olehedza.rickandmorty.service.CharacterService;
 import com.olehedza.rickandmorty.service.EpisodeService;
 import com.olehedza.rickandmorty.service.JsonParser;
+import java.net.URISyntaxException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,9 +27,12 @@ public class ClientDatabaseStartupSynchronization implements CommandLineRunner {
 
 
     @Autowired
-    public ClientDatabaseStartupSynchronization(JsonParser jsonParser, CharacterService characterService,
-                                                EpisodeService episodeService, OriginMapper originMapper,
-                                                LocationMapper locationMapper, CharacterMapper characterMapper) {
+    public ClientDatabaseStartupSynchronization(JsonParser jsonParser,
+                                                CharacterService characterService,
+                                                EpisodeService episodeService,
+                                                OriginMapper originMapper,
+                                                LocationMapper locationMapper,
+                                                CharacterMapper characterMapper) {
         this.jsonParser = jsonParser;
         this.characterService = characterService;
         this.episodeService = episodeService;
@@ -37,7 +42,8 @@ public class ClientDatabaseStartupSynchronization implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args)
+            throws JsonProcessingException, URISyntaxException {
         CharactersDto charactersDto = jsonParser.parseToPojo();
         List<CharacterDto> dtos = charactersDto.getCharacterDtos();
         for (CharacterDto dto: dtos) {
