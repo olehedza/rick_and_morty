@@ -4,6 +4,7 @@ import com.olehedza.rickandmorty.dto.client.CharacterDto;
 import com.olehedza.rickandmorty.dto.response.CharacterResponseDto;
 import com.olehedza.rickandmorty.model.Character;
 import com.olehedza.rickandmorty.model.Episode;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class CharacterMapper {
                 .map(Episode::new)
                 .collect(Collectors.toSet())));
         model.setUrl(characterDto.getUrl());
-        model.setCreated(characterDto.getCreated());
+        model.setCreated(Instant.parse(characterDto.getCreated()));
         return model;
     }
 
@@ -50,7 +51,7 @@ public class CharacterMapper {
                 .map(Episode::getUrl)
                 .collect(Collectors.toList())));
         dto.setUrl(character.getUrl());
-        dto.setCreated(character.getCreated());
+        dto.setCreated(character.getCreated().toString());
         return dto;
     }
 }
