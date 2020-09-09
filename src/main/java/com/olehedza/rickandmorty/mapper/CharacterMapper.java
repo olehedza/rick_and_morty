@@ -22,10 +22,10 @@ public class CharacterMapper {
     public Character toModel(CharacterDto characterDto) {
         Character model = new Character();
         model.setName(characterDto.getName());
-        model.setStatus(characterDto.getStatus());
+        model.setStatus(Character.Status.valueOf(characterDto.getStatus()));
         model.setSpecies(characterDto.getSpecies());
         model.setType(characterDto.getType());
-        model.setGender(characterDto.getGender());
+        model.setGender(Character.Gender.valueOf(characterDto.getGender()));
         model.setImage(characterDto.getImage());
         model.setEpisodes(new HashSet<>(characterDto.getEpisodes().stream()
                 .map(Episode::new)
@@ -39,10 +39,10 @@ public class CharacterMapper {
         CharacterResponseDto dto = new CharacterResponseDto();
         dto.setId(character.getId());
         dto.setName(character.getName());
-        dto.setStatus(character.getStatus());
+        dto.setStatus(character.getStatus().name());
         dto.setSpecies(character.getSpecies());
         dto.setType(character.getType());
-        dto.setGender(character.getGender());
+        dto.setGender(character.getGender().name());
         dto.setOrigin(originMapper.toDto(character.getOrigin()));
         dto.setLocation(locationMapper.toDto(character.getLocation()));
         dto.setImage(character.getImage());
