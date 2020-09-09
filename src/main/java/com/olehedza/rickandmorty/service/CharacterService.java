@@ -6,7 +6,7 @@ import java.util.List;
 public interface CharacterService {
     Character save(Character character);
 
-    Character getRandomById();
+    Character getRandomCharacter();
 
-    List<Character> getAllByNameContains(String name);
+    List<Character> getCharactersByNameContains(String name);
 }

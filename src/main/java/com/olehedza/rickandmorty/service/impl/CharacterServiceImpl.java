@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class CharacterServiceImpl implements CharacterService {
     private static final int MIN = 1;
     private static final int MAX = 20;
-
     private final CharacterDao characterDao;
 
     @Autowired
@@ -26,14 +25,14 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public Character getRandomById() {
+    public Character getRandomCharacter() {
         Random random = new Random();
         long randomCharacterId = random.nextInt((MAX - MIN) + 1) + MIN;
         return characterDao.getById(randomCharacterId);
     }
 
     @Override
-    public List<Character> getAllByNameContains(String name) {
+    public List<Character> getCharactersByNameContains(String name) {
         return characterDao.getAllByNameContains(name);
     }
 }
