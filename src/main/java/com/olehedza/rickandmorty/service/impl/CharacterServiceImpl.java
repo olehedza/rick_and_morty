@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
-    private static final int MIN = 1;
-    private static final int MAX = 20;
     private final CharacterDao characterDao;
+    private final Random random;
 
     @Autowired
     public CharacterServiceImpl(CharacterDao characterDao) {
         this.characterDao = characterDao;
+        this.random = new Random();
     }
 
     @Override
@@ -26,9 +26,8 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character getRandomCharacter() {
-        Random random = new Random();
-        long randomCharacterId = random.nextInt((MAX - MIN) + 1) + MIN;
-        return characterDao.getById(randomCharacterId);
+        List<Character> characters = characterDao.findAll();
+        return characters.get(random.nextInt(characters.size()));
     }
 
     @Override
