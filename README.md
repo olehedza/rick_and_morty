@@ -34,6 +34,13 @@ API usage:
 # <a name="#startup"></a>Startup instructions
 * prerequisites: JDK SE 11+, Spring Boot, PostgresQL; Jetbrains IDE, Git
 
+We start the web server from the starting point - RickandmortyApplication. After that, the server sequentially
+  executes requests to the external API, parses the received data and saves it 
+  to a local database (the settings for which we have specified in the project configuration file).
+   By default, the web server executes 20 queries on different pages, each of which contains
+    a result for 20 characters. You can query the above APIs for the local server as soon as
+     you deploy the web server and start synchronizing data. 
+
 # <a name="author"></a>Author  
 
 Oleksii Lehedza: https://github.com/olehedza                                               
