@@ -1,5 +1,8 @@
 package com.olehedza.rickandmorty.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.olehedza.rickandmorty.dto.client.CharacterDto;
 import com.olehedza.rickandmorty.dto.response.CharacterResponseDto;
 import com.olehedza.rickandmorty.model.Character;
@@ -7,17 +10,41 @@ import com.olehedza.rickandmorty.model.Episode;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CharacterMapper {
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(CharacterMapper.class);
     private final OriginMapper originMapper;
     private final LocationMapper locationMapper;
+    private final ObjectMapper objectMapper;
 
     public CharacterMapper(OriginMapper originMapper, LocationMapper locationMapper) {
         this.originMapper = originMapper;
         this.locationMapper = locationMapper;
+        objectMapper = new ObjectMapper();
+    }
+
+    public List<CharacterDto> toDtoList(String jsonString, String nodeName)
+            throws JsonProcessingException {
+        List<CharacterDto> dtoList = new ArrayList<>();
+        try {
+            JsonNode root = objectMapper.readTree(jsonString);
+            JsonNode jsonNodes = root.path(nodeName);
+
+            for (JsonNode node: jsonNodes) {
+                dtoList.add(objectMapper.readValue(node.toString(), CharacterDto.class));
+            }
+        } catch (JsonProcessingException e) {
+            LOGGER.error("Error while json string processing.", e);
+            throw e;
+        }
+        return dtoList;
     }
 
     public Character toModel(CharacterDto characterDto) {
