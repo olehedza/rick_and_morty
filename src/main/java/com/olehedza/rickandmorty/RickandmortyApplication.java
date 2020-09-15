@@ -30,8 +30,8 @@ public class RickandmortyApplication {
     private final LocationMapper locationMapper;
     private final CharacterMapper characterMapper;
     private int requestCounter;
-    @Value("${api.request-limit}")
-    private int requestCount;
+    private @Value("${api.request-limit}") int requestLimit;
+    private @Value("${api.character.uri}") String characterUri;
 
     public RickandmortyApplication(RickAndMortyAPIClient apiClient,
                                    CharacterService characterService,
@@ -50,9 +50,10 @@ public class RickandmortyApplication {
 
     @Scheduled(cron = "${api.database.sync.cron}")
     void apiDatabaseSync() throws JsonProcessingException, URISyntaxException {
-        if (requestCounter <= requestCount) {
-            List<CharacterDto> dtos = apiClient.parseJsonToDtoList(NODE_NAME);
-            for (CharacterDto dto: dtos) {
+        if (requestCounter <= requestLimit) {
+            String jsonString = apiClient.getJsonString(characterUri + requestCounter);
+            List<CharacterDto> dtoList = characterMapper.toDtoList(jsonString, NODE_NAME);
+            for (CharacterDto dto: dtoList) {
                 Character character = characterMapper.toModel(dto);
                 character.setOrigin(originMapper.toModel(dto.getOrigin()));
                 character.setLocation(locationMapper.toModel(dto.getLocation()));
